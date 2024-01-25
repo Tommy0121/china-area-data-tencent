@@ -1,0 +1,20 @@
+{
+  "name": "china-area-data-tencent",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node ./src/build.ts"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "jszip": "^3.10.1",
+    "lodash": "^4.17.21",
+    "puppeteer": "^21.7.0",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.202",
+    "ts-node": "^10.9.2"
+  }
+}
