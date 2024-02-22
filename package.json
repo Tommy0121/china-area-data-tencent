@@ -5,8 +5,8 @@
   "license": "MIT",
   "bin": "./dist/index.js",
   "scripts": {
-    "start": "ts-node ./src/build.ts",
-    "build": "tsc && yarn start"
+    "generate": "tsc && node ./dist/build.js",
+    "build": "tsc && yarn generate"
   },
   "dependencies": {
     "commander": "^12.0.0",
