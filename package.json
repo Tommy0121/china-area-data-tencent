@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "bin": "./dist/index.js",
   "scripts": {
-    "start": "ts-node ./src/build.ts"
+    "start": "ts-node ./src/build.ts",
+    "build": "tsc && yarn start"
   },
   "dependencies": {
+    "commander": "^12.0.0",
     "exceljs": "^4.4.0",
     "jszip": "^3.10.1",
     "lodash": "^4.17.21",

@@ -12,11 +12,6 @@ const TENCENT_REGION_DATA_URL = 'https://lbs.qq.com/service/webService/webServic
 // 这个没有很准，提供selector入参
 const xPath = '//*[@id="__layout"]/div/div[1]/div[2]/div[2]/div[1]/div[2]/p[16]/a'
 
-// const injectSelector = () => {
-//     const link = Array.from(document.querySelectorAll('a'))?.filter(item => item.innerText === "行政区划编码表" && item.href !== '')[0]?.href
-//     return link
-// }
-
 
 export const getExcelFileUrl = async (url: string = TENCENT_REGION_DATA_URL, selector: string = xPath): Promise<string> => {
     const browser = await puppeteer.launch({ headless: true })
