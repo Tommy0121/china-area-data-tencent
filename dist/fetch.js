@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getExcelFile = exports.getExcelFileUrl = void 0;
+exports.getExcelFile = exports.getExcelFileUrl = exports.xPath = exports.TENCENT_REGION_DATA_URL = void 0;
 /*
  * @Date: 2024-01-24 14:08:59
  * @LastEditors: tommyxia 709177815@qq.com
@@ -21,13 +21,13 @@ exports.getExcelFile = exports.getExcelFileUrl = void 0;
  */
 const puppeteer_1 = __importDefault(require("puppeteer"));
 const jszip_1 = __importDefault(require("jszip"));
-const TENCENT_REGION_DATA_URL = 'https://lbs.qq.com/service/webService/webServiceGuide/webServiceDistrict';
+exports.TENCENT_REGION_DATA_URL = 'https://lbs.qq.com/service/webService/webServiceGuide/webServiceDistrict';
 // 这个没有很准，提供selector入参
-const xPath = '//*[@id="__layout"]/div/div[1]/div[2]/div[2]/div[1]/div[2]/p[16]/a';
-const getExcelFileUrl = (url = TENCENT_REGION_DATA_URL, selector = xPath) => __awaiter(void 0, void 0, void 0, function* () {
-    const browser = yield puppeteer_1.default.launch({ headless: true });
+exports.xPath = '//*[@id="__layout"]/div/div[1]/div[2]/div[2]/div[1]/div[2]/p[16]/a';
+const getExcelFileUrl = (url = exports.TENCENT_REGION_DATA_URL, selector = exports.xPath) => __awaiter(void 0, void 0, void 0, function* () {
+    const browser = yield puppeteer_1.default.launch({ headless: 'new' });
     const page = yield browser.newPage();
-    yield page.goto(url !== null && url !== void 0 ? url : TENCENT_REGION_DATA_URL);
+    yield page.goto(url !== null && url !== void 0 ? url : exports.TENCENT_REGION_DATA_URL);
     const linkElement = yield page.$x(selector);
     const link = yield linkElement[0].getProperty('href');
     const value = yield link.jsonValue();
@@ -35,15 +35,12 @@ const getExcelFileUrl = (url = TENCENT_REGION_DATA_URL, selector = xPath) => __a
     return value;
 });
 exports.getExcelFileUrl = getExcelFileUrl;
-const getExcelFile = () => __awaiter(void 0, void 0, void 0, function* () {
-    // const link = await getExcelFileUrl()
-    // TODO 暂时写死成这样的
-    const link = 'https://mapapi.qq.com/web/district-code/district-code_20230901.zip';
+const getExcelFile = (url = exports.TENCENT_REGION_DATA_URL, selector = exports.xPath) => __awaiter(void 0, void 0, void 0, function* () {
+    const link = yield (0, exports.getExcelFileUrl)(url, selector);
     return fetch(link).then(res => res.arrayBuffer()).then((arraybuffer) => jszip_1.default.loadAsync(arraybuffer).then((zip) => {
         const { files } = zip;
         const fileNameList = Object.keys(files);
         const finalFileName = fileNameList.filter((filename) => filename.endsWith('.xlsx') && !filename.startsWith('__MACOSX'))[0];
-        console.log('filename', finalFileName);
         return zip.file(finalFileName);
     }).then((file) => {
         if (file) {

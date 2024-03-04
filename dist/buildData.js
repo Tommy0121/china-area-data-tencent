@@ -97,7 +97,6 @@ const buildData = (tree) => {
             element.children.forEach(item => {
                 obj[element.value][item.value] = item.label;
                 if (item.children) {
-                    console.log([item]);
                     temp = temp.concat(buildData([item]));
                 }
             });
@@ -118,7 +117,7 @@ const buildJsonData = (tree) => {
     const data = buildData(tree);
     return res.concat(data);
 };
-const PPRun = () => __awaiter(void 0, void 0, void 0, function* () {
+const PPRun = (url = fetch_1.TENCENT_REGION_DATA_URL, selector = fetch_1.xPath) => __awaiter(void 0, void 0, void 0, function* () {
     const stream = yield (0, fetch_1.getExcelFile)();
     const workbook = new exceljs_1.default.Workbook();
     let tree = [];

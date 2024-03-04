@@ -15,7 +15,6 @@ const fs_1 = __importDefault(require("fs"));
         }
         const treeFile = `${generator_1.DATA_DIR}/tree.json`;
         const dataFile = `${generator_1.DATA_DIR}/data.json`;
-        console.log(data, 'data');
         fs_1.default.writeFileSync(treeFile, JSON.stringify(tree, null, 2));
         fs_1.default.writeFileSync(dataFile, JSON.stringify(data, null, 2));
     }

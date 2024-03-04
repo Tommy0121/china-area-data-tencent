@@ -4,7 +4,7 @@
  * @LastEditTime: 2024-01-25 17:22:24
  * @FilePath: /test/src/build.ts
  */
-import { getExcelFile } from './fetch'
+import { getExcelFile, TENCENT_REGION_DATA_URL, xPath } from './fetch'
 import ExcelJS from 'exceljs'
 import { Dictionary, groupBy } from 'lodash'
 
@@ -130,7 +130,7 @@ const buildJsonData = (tree: TreeNode[]) => {
   return res.concat(data)
 }
 
-export const PPRun = async () => {
+export const PPRun = async (url: string = TENCENT_REGION_DATA_URL, selector: string = xPath) => {
   const stream = await getExcelFile()
 
   const workbook = new ExcelJS.Workbook();
