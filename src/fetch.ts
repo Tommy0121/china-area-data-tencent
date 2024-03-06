@@ -27,7 +27,8 @@ export const getExcelFileUrl = async (url: string = TENCENT_REGION_DATA_URL, sel
 }
 
 export const getExcelFile = async (url: string = TENCENT_REGION_DATA_URL, selector: string = xPath): Promise<null | NodeJS.ReadableStream> => {
-  const link = await getExcelFileUrl(url, selector)
+  // const link = await getExcelFileUrl(url, selector)
+  const link = "https://mapapi.qq.com/web/district-code/district-code_20230901.zip"
   return fetch(link).then(res => res.arrayBuffer()).then((arraybuffer) => JSZip.loadAsync(arraybuffer).then((zip) => {
     const { files } = zip
     const fileNameList = Object.keys(files)

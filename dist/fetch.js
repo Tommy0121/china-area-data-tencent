@@ -36,7 +36,8 @@ const getExcelFileUrl = (url = exports.TENCENT_REGION_DATA_URL, selector = expor
 });
 exports.getExcelFileUrl = getExcelFileUrl;
 const getExcelFile = (url = exports.TENCENT_REGION_DATA_URL, selector = exports.xPath) => __awaiter(void 0, void 0, void 0, function* () {
-    const link = yield (0, exports.getExcelFileUrl)(url, selector);
+    // const link = await getExcelFileUrl(url, selector)
+    const link = "https://mapapi.qq.com/web/district-code/district-code_20230901.zip";
     return fetch(link).then(res => res.arrayBuffer()).then((arraybuffer) => jszip_1.default.loadAsync(arraybuffer).then((zip) => {
         const { files } = zip;
         const fileNameList = Object.keys(files);

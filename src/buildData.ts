@@ -97,22 +97,29 @@ type TData = {
   [key: string]: {
     [key: string]: string;
   };
-}[]
+}
+
+const isEmptyObj = (obj: TData) => {
+  const keys = Object.keys(obj)
+  return keys.length === 1 && Object.keys(obj[keys[0]]).length === 0
+}
 
 const buildData = (tree: TreeNode[]): TData => {
-  let result: { [key: string]: { [key: string]: string } }[] = []
+  let result: { [key: string]: { [key: string]: string } } = {}
   tree.forEach(element => {
     if (element?.children) {
       let obj: { [key: string]: { [key: string]: string } } = { [element.value]: {} }
-      let temp: TData = []
+      let temp: TData = {}
       element.children.forEach(item => {
         obj[element.value][item.value] = item.label
         if (item.children) {
-          temp = temp.concat(buildData([item]))
+          temp = { ...temp, ...buildData([item]) }
         }
       })
-      result.push(obj)
-      result = result.concat(temp)
+      if (isEmptyObj(obj)) {
+        obj = {}
+      }
+      result = { ...result, ...obj, ...temp }
     }
   })
   return result
@@ -125,13 +132,13 @@ const buildJsonData = (tree: TreeNode[]) => {
       countryArray[ChinaCountryCode][element.value] = element.label
     }
   })
-  const res = [countryArray]
+  const res = { ...countryArray }
   const data = buildData(tree)
-  return res.concat(data)
+  return { ...res, ...data }
 }
 
 export const PPRun = async (url: string = TENCENT_REGION_DATA_URL, selector: string = xPath) => {
-  const stream = await getExcelFile()
+  const stream = await getExcelFile(url, selector)
 
   const workbook = new ExcelJS.Workbook();
 

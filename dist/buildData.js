@@ -88,20 +88,26 @@ const buildTree = (list) => {
     });
     return result;
 };
+const isEmptyObj = (obj) => {
+    const keys = Object.keys(obj);
+    return keys.length === 1 && Object.keys(obj[keys[0]]).length === 0;
+};
 const buildData = (tree) => {
-    let result = [];
+    let result = {};
     tree.forEach(element => {
         if (element === null || element === void 0 ? void 0 : element.children) {
             let obj = { [element.value]: {} };
-            let temp = [];
+            let temp = {};
             element.children.forEach(item => {
                 obj[element.value][item.value] = item.label;
                 if (item.children) {
-                    temp = temp.concat(buildData([item]));
+                    temp = Object.assign(Object.assign({}, temp), buildData([item]));
                 }
             });
-            result.push(obj);
-            result = result.concat(temp);
+            if (isEmptyObj(obj)) {
+                obj = {};
+            }
+            result = Object.assign(Object.assign(Object.assign({}, result), obj), temp);
         }
     });
     return result;
@@ -113,12 +119,12 @@ const buildJsonData = (tree) => {
             countryArray[ChinaCountryCode][element.value] = element.label;
         }
     });
-    const res = [countryArray];
+    const res = Object.assign({}, countryArray);
     const data = buildData(tree);
-    return res.concat(data);
+    return Object.assign(Object.assign({}, res), data);
 };
 const PPRun = (url = fetch_1.TENCENT_REGION_DATA_URL, selector = fetch_1.xPath) => __awaiter(void 0, void 0, void 0, function* () {
-    const stream = yield (0, fetch_1.getExcelFile)();
+    const stream = yield (0, fetch_1.getExcelFile)(url, selector);
     const workbook = new exceljs_1.default.Workbook();
     let tree = [];
     if (stream) {
