@@ -1,10 +1,10 @@
 {
   "name": "china-area-data-tencent",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./dist/main.js",
   "license": "MIT",
   "bin": {
-    "create-china-area-data-tencent": "./dist/index.js"
+    "create-china-area-data-tencent": "dist/index.js"
   },
   "scripts": {
     "generate": "node ./dist/build.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tommy0121/china-area-data-tencent"
+    "url": "git+https://github.com/Tommy0121/china-area-data-tencent.git"
   },
   "dependencies": {
     "commander": "^12.0.0",
