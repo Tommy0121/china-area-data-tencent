@@ -1,4 +1,4 @@
-# china-china-area-data-tencent
+# 中国行政区域数据 腾讯版
 
 腾讯地图版本的中国行政区规划数据格式化，数据来源为腾讯地图官方网站，见以下[链接](https://lbs.qq.com/service/webService/webServiceGuide/webServiceDistrict)  
 
