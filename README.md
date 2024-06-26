@@ -17,7 +17,7 @@
 
 **直接在当前目录生成json**
 
-`npx create-china-area-data-tencent`  
+`npx china-area-data-tencent`  
 
 支持三个参数  
 
