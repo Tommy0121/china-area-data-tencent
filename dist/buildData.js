@@ -31,6 +31,9 @@ var REGION_TYPE;
 })(REGION_TYPE || (REGION_TYPE = {}));
 const ChinaCountryCode = '86';
 const getType = (value) => {
+    if (!value) {
+        return;
+    }
     let [country, province, city, area] = value.split(',');
     let type;
     if (area) {

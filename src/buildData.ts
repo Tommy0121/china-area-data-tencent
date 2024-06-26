@@ -26,6 +26,9 @@ type TreeNode = {
 }
 
 const getType = (value: string) => {
+  if (!value) {
+    return 
+  }
   let [country, province, city, area] = value.split(',');
   let type;
   if (area) {

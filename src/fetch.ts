@@ -7,7 +7,7 @@
 import puppeteer from 'puppeteer';
 import JSZip from "jszip";
 
-export const TENCENT_REGION_DATA_URL = 'https://lbs.qq.com/service/webService/webServiceGuide/webServiceDistrict'
+export const TENCENT_REGION_DATA_URL = 'https://lbs.qq.com/service/webService/webServiceGuide/search/webServiceDistrict'
 
 // 这个没有很准，提供selector入参
 export const xPath = '//*[@id="__layout"]/div/div[1]/div[2]/div[2]/div[1]/div[2]/p[16]/a'
