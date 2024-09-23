@@ -23,9 +23,9 @@ const puppeteer_1 = __importDefault(require("puppeteer"));
 const jszip_1 = __importDefault(require("jszip"));
 exports.TENCENT_REGION_DATA_URL = 'https://lbs.qq.com/service/webService/webServiceGuide/search/webServiceDistrict';
 // 这个没有很准，提供selector入参
-exports.xPath = '//*[@id="__layout"]/div/div[1]/div[2]/div[2]/div[1]/div[2]/p[16]/a';
+exports.xPath = '//*[@id="__layout"]/div/div[1]/div[2]/div[2]/div[1]/div[2]/p[17]/a';
 const getExcelFileUrl = (url = exports.TENCENT_REGION_DATA_URL, selector = exports.xPath) => __awaiter(void 0, void 0, void 0, function* () {
-    const browser = yield puppeteer_1.default.launch({ headless: 'new' });
+    const browser = yield puppeteer_1.default.launch({ headless: false });
     const page = yield browser.newPage();
     yield page.goto(url !== null && url !== void 0 ? url : exports.TENCENT_REGION_DATA_URL);
     const linkElement = yield page.$x(selector);

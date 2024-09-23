@@ -10,11 +10,11 @@ import JSZip from "jszip";
 export const TENCENT_REGION_DATA_URL = 'https://lbs.qq.com/service/webService/webServiceGuide/search/webServiceDistrict'
 
 // 这个没有很准，提供selector入参
-export const xPath = '//*[@id="__layout"]/div/div[1]/div[2]/div[2]/div[1]/div[2]/p[16]/a'
+export const xPath = '//*[@id="__layout"]/div/div[1]/div[2]/div[2]/div[1]/div[2]/p[17]/a'
 
 
 export const getExcelFileUrl = async (url: string = TENCENT_REGION_DATA_URL, selector: string = xPath): Promise<string> => {
-  const browser = await puppeteer.launch({ headless: 'new' })
+  const browser = await puppeteer.launch({ headless: false })
   const page = await browser.newPage();
   await page.goto(url ?? TENCENT_REGION_DATA_URL);
   const linkElement = await page.$x(selector)
